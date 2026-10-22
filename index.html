@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Cilindrata</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="container">
+
+    <div class="card">
+
+        <h1>🏎️ Calcolatore Motore</h1>
+        <p class="subtitle">Cilindrata e calcoli motore</p>
+
+        <!-- ========================= -->
+        <!-- MOTORE PRINCIPALE -->
+        <!-- ========================= -->
+
+        <h3>Motore</h3>
+
+        <div class="input-group">
+            <label for="alesaggio">Alesaggio</label>
+            <div class="input-container">
+                <input type="number" id="alesaggio" placeholder="Es. 86" min="0" step="0.01">
+                <span>mm</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="corsa">Corsa</label>
+            <div class="input-container">
+                <input type="number" id="corsa" placeholder="Es. 86" min="0" step="0.01">
+                <span>mm</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="cilindri">Numero cilindri</label>
+            <div class="input-container">
+                <input type="number" id="cilindri" placeholder="Es. 4" min="1" step="1">
+                <span>cil.</span>
+            </div>
+        </div>
+
+        <button id="calcola">CALCOLA</button>
+
+        <div id="errore" class="errore"></div>
+
+        <!-- RISULTATI -->
+
+        <div id="risultato" class="risultato hidden">
+
+            <p>Cilindrata totale</p>
+            <h2 id="cc">0 cc</h2>
+
+            <div class="details">
+
+                <div>
+                    <span>Litri</span>
+                    <strong id="litri">0 L</strong>
+                </div>
+
+                <div>
+                    <span>Per cilindro</span>
+                    <strong id="ccCilindro">0 cc</strong>
+                </div>
+
+            </div>
+
+            <div class="advanced">
+
+                <h3>📐 Calcoli avanzati</h3>
+
+                <div class="result-row">
+                    <span>Rapporto alesaggio/corsa</span>
+                    <strong id="rapporto">0</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Tipo geometria</span>
+                    <strong id="tipoMotore">-</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- CONFRONTO MOTORI -->
+        <!-- ========================= -->
+
+        <div class="comparison">
+
+            <h2>🔧 Confronta due motori</h2>
+
+            <h3>Motore originale</h3>
+
+            <div class="input-group">
+                <label>Alesaggio</label>
+                <div class="input-container">
+                    <input type="number" id="origAlesaggio" placeholder="Es. 86">
+                    <span>mm</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Corsa</label>
+                <div class="input-container">
+                    <input type="number" id="origCorsa" placeholder="Es. 86">
+                    <span>mm</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Cilindri</label>
+                <div class="input-container">
+                    <input type="number" id="origCilindri" placeholder="Es. 4">
+                    <span>cil.</span>
+                </div>
+            </div>
+
+
+            <h3>Motore modificato</h3>
+
+            <div class="input-group">
+                <label>Alesaggio</label>
+                <div class="input-container">
+                    <input type="number" id="modAlesaggio" placeholder="Es. 88">
+                    <span>mm</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Corsa</label>
+                <div class="input-container">
+                    <input type="number" id="modCorsa" placeholder="Es. 90">
+                    <span>mm</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Cilindri</label>
+                <div class="input-container">
+                    <input type="number" id="modCilindri" placeholder="Es. 4">
+                    <span>cil.</span>
+                </div>
+            </div>
+
+            <button id="confronta">CONFRONTA</button>
+
+            <div id="risultatoConfronto" class="risultato hidden">
+
+                <div class="comparison-box">
+
+                    <div>
+                        <span>Originale</span>
+                        <strong id="ccOriginale">0 cc</strong>
+                    </div>
+
+                    <div>
+                        <span>Modificato</span>
+                        <strong id="ccModificato">0 cc</strong>
+                    </div>
+
+                </div>
+
+                <div class="difference">
+                    <span>Differenza</span>
+                    <strong id="differenza">0 cc</strong>
+                </div>
+
+                <div class="difference">
+                    <span>Variazione</span>
+                    <strong id="percentuale">0%</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <p class="footer">
+        Calcolatore geometrico del motore
+    </p>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+
+        window.addEventListener("load", () => {
+
+            navigator.serviceWorker.register("./sw.js")
+                .then(() => {
+                    console.log("Service Worker registrato!");
+                })
+                .catch(error => {
+                    console.error(
+                        "Errore Service Worker:",
+                        error
+                    );
+                });
+
+        });
+
+    }
+</script>
+
+</body>
+</html>
